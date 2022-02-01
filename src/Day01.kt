@@ -1,17 +1,11 @@
 fun main() {
-    fun part1(input: List<String>): Int {
-        return input.size
+    val input = readInput("day1-inputA")
+    val sweepData = input.map { it.toInt() }
+    println("Answer 1 :${sweepData.countIncreases()}")
+    val tripletData = mutableListOf<Int>()
+    for (i in 0 until sweepData.size - 2){
+        tripletData.add(sweepData.slice(i..i+2).sum())
     }
-
-    fun part2(input: List<String>): Int {
-        return input.size
-    }
-
-    // test if implementation meets criteria from the description, like:
-    val testInput = readInput("Day01_test")
-    check(part1(testInput) == 1)
-
-    val input = readInput("Day01")
-    println(part1(input))
-    println(part2(input))
+    println("Answer 2 :${tripletData.countIncreases()}")
 }
+fun List<Int>.countIncreases() : Int = filterIndexed { i, e -> i > 0 && e > this[i - 1]}.count()
